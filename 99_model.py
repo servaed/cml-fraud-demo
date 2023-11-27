@@ -132,7 +132,7 @@ class autoencoder(nn.Module):
         return x
 
 num_features=29
-split_point=-1.01
+split_point=-1.207
 
 import joblib
 scaler=joblib.load('model/cc_scaler.pkl')
@@ -150,9 +150,9 @@ def predict(args):
         loss=torch.sum((inp-outp)**2,dim=1).sqrt().log()
         res=loss.item()>split_point
         if res == True:
-          res_segment = "High Spend"
+          res_segment = "true"
         else:
-          res_segment = "Low Spend"
+          res_segment = "false"
         return {
         "ACCOUNT_ID" : args['ACCOUNT_ID'],
         "V1" : args['V1'],

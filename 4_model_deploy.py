@@ -99,7 +99,7 @@ example_model_input = {
 
 create_model_params = {
     "projectId": project_id,
-    "runtimeId": 82, #Change this to your workspace runtime ID with Python 3.7 and Spark Enabled
+    "runtimeId": 84, #Change this to your workspace runtime ID with Python 3.7 and Spark Enabled
     "name": "Fraud Detection " + run_time_suffix,
     "description": "Fraud Detection",
     "visibility": "private",

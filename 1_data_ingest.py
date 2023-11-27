@@ -88,7 +88,7 @@ spark = SparkSession\
 storage = os.environ['STORAGE']
 
 cc_data = spark.read.csv(
-  "{}/datalake/data/anomalydetection/creditcard.csv".format(storage),
+  "/home/cdsw/data/creditcard.csv".format(storage),
   header=True,
   inferSchema=True,
   sep=',',
@@ -116,14 +116,13 @@ spark.sql("drop table if exists default.cc_data")
 # This is here to create the table in Hive used be the other parts of the project, if it
 # does not already exist.
 
-if ('cc_data' not in list(spark.sql("show tables in default").toPandas()['tableName'])):
-  print("creating the cc_data database")
-  cc_data\
-    .write.format("parquet")\
-    .mode("overwrite")\
-    .saveAsTable(
-      'default.cc_data'
-  )
+print("creating the cc_data database")
+cc_data\
+  .write.format("parquet")\
+  .mode("overwrite")\
+  .saveAsTable(
+    'default.cc_data'
+)
 
 # Show the data in the hive table
 spark.sql("select * from default.cc_data").show()
